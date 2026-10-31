@@ -1,9 +1,18 @@
 # Created using @tscircuit/plop (npm install -g @tscircuit/plop)
 name: Publish to npm
+# DISABLED 2026-10-31 (Deus Intus estate audit, supabase->postgres migration prep).
+# This workflow used to run on every push to `main` and `pver release` would publish
+# the package @tscircuit/file-server to the public npm registry using secrets.NPM_TOKEN.
+# This repo is a fork of tscircuit/file-server; it must not publish under the upstream scope.
+# The trigger is now manual-only (workflow_dispatch). The file is NOT deleted.
+# TO RESTORE: revert the commit that made this change, or put back:
+#   on:
+#     push:
+#       branches:
+#         - main
+# Do not restore without founder approval and a renamed package / valid npm scope.
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 jobs:
   publish:
     runs-on: ubuntu-latest
